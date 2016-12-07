@@ -56,8 +56,8 @@
          <!--<li> <a class="navbar-brand" href="home.php"><img src="images/logo_br_conecta.png" alt="Brconecta" /></a></li>-->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-left">
-     
+		<ul class="nav navbar-nav navbar-left">
+		 
           <ul class="nav navbar-nav navbar-right">
            <li><h3>SISTEMA DE VENDAS</h3></li></ul>
           </ul>
@@ -70,55 +70,67 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-1 col-md-3 sidebar">
-      <br><br>
-      <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">ENTRADA/SAÍDA<span class="sr-only">(current)</span></a></li>
-            <li><a href="cad_entrada.php">Cadastrar Entrada</a></li>
-            <li><a href="cad_saida.php">Cadastrar Venda</a></li>
+		  <br><br>
+		   <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">PRODUTO<span class="sr-only">(current)</span></a></li>
+            <li><a href="cad_produto.html">Cadastrar Produto</a></li>
+            <li><a href="lista_produto.php">Cadastrar Entrada</a></li>
+            <li> <a href="cad_categoria.php">Estoque de Produtos</a></li>
             </ul>
            <ul class="nav nav-sidebar">
             <li class="active"><a href="#">CADASTROS<span class="sr-only">(current)</span></a></li>
-             <li><a href="cad_produto.html">Produto</a></li>
             <li><a href="cad_cliente.html">Clientes</a></li>
-            <li><a href="cad_usuario.php">Usuários</a></li>
-            <li><a href="cad_funcinario.php">Funcionários</a></li>
-            <li><a href="cad_fornecedor.php">Fornecedor</a></li>
-            <li><a href="cad_loja.php">Lojas</a></li>
+            <li><a href="cad_contaspagar.php">Usuários</a></li>
+            <li><a href="cad_contasreceber.php">Funcionários</a></li>
+            <li><a href="cad_contaspagar.php">Fornecedor</a></li>
+            <li><a href="cad_contasreceber.php">Lojas</a></li>
             </ul>
 
+           <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">VENDAS<span class="sr-only">(current)</span></a></li>
+            <li><a href="cad_contasreceber.php">Cadastrar Venda</a></li>
+            <li><a href="cad_contaspagar.php">Consultar Vendas</a></li>
         </div>
 
           </div>
 
         </div>
-
-
  <div class="container">
       <div class="header clearfix">
         <div class="col-sm-10 col-sm-offset-5 col-md-12 col-md-offset-2 main">
          <div class="jumbotron">
 
-          <center><h4 class="sub-header">Cliente</h4></center> 
+          <center><h4 class="sub-header">Compra</h4></center> 
 
-<<<<<<< HEAD
-=======
 <div class="form-group">
-    <label for="descricao">Nome</label><br>
-  <input name="nome" type="nome" class="form-control" class="input" placeholder="Nome">
+    <label for="idProd">Id - Produto</label>
+  <input name="produto" type="text" class="form-control"  style=" width:130px" class="input" placeholder="Id do Produto">
+
   </div>  
->>>>>>> dd6db030ea9d930b9989b67980a8f3ab3dce14fc
 
-<div class="form-group">
-    <label for="valor">Fiador</label><br>
-    <input type="text" class="form-control" name="valor" placeholder="Fiador">
-  </div>
-
-  <div class="form-group">
-    <label for="valor">Contato Fiador</label><br>
-    <input type="text" class="form-control" name="valor" placeholder="Contato Fiador">
-  </div>
   
-
+  <div class="form-group" >
+      <label for="Quantidade">Quantidade</label>
+    <input type="qtd" value="1" class="form-control" name="qtd" style=" width:35px">
+  </div>
+  <table class="table">
+  <th>
+      Codigo
+    </th>     
+      <th>
+      Produto
+    </th> 
+      <th>
+      Valor
+    </th> 
+      <th>
+        Qtd   
+    </th> 
+      <th>
+      Valor Total
+    </th> 
+</table>
+   
   <button type="button" class="btn btn-success">Salvar</button>
 
 </body>
