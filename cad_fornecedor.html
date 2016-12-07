@@ -83,7 +83,7 @@
             <li><a href="cad_usuario.html">Usuários</a></li>
             <li><a href="cad_funcinario.html">Funcionários</a></li>
             <li><a href="cad_fornecedor.html">Fornecedor</a></li>
-            <li><a href="cad_loja.html">Lojas</a></li>
+            <li><a href="cad_loja.php">Lojas</a></li>
             </ul>
 
       
@@ -99,37 +99,37 @@
         <div class="col-sm-10 col-sm-offset-5 col-md-12 col-md-offset-2 main">
          <div class="jumbotron">
 
-          <center><h4 class="sub-header">Produto</h4></center> 
+          <center><h4 class="sub-header">Fornecedor</h4></center> 
 
 <div class="form-group">
-    <label for="descricao">Descrição</label><br>
-  <input name="descricao" type="descricao" class="form-control"  class="input" placeholder="Descrição do Produto">
+    <label for="nome">Nome</label><br>
+  <input name="nome" type="nome" class="form-control"  class="input" placeholder="Nome">
   </div>  
 
   
   <div class="form-group">
-    <label for="marca">Marca</label><br>
-    <input type="marca" class="form-control" name="marca" placeholder="Marca">
+    <label for="cpfcnpj">CPF/CNPJ</label><br>
+    <input type="text" class="form-control" name="cpfcnpj" placeholder="CPF/CNPJ">
   </div>
   
   <div class="form-group">
-    <label for="valor">Valor</label><br>
-    <input type="text" class="form-control" name="valor" placeholder="R$">
+    <label for="email">Email</label><br>
+    <input type="email" class="form-control" name="email" placeholder="example@email.com">
   </div>
 
   
   <div class="form-group">
-    <label for="unidademedida">Unidade de Medida</label>
-    <input type="unidademedida" class="form-control" id="date" name="unidademedida" placeholder="Unidade">
+    <label for="telefone">Telefone</label>
+    <input type="number" class="form-control" id="telefone" name="telefone" placeholder="(00)0000-0000">
   </div>
   
   <div class="form-group">
-    <label for="grupo"> Loja </label>
-<select id="idloja" name="idloja" class="form-control">
-  <option value="" selected="">Selecione a loja </option>
-</select> 
+    <label for="login">Inscrição Estadual</label>
+    <input type="number" class="form-control" id="inscricao" name="inscricao" placeholder="Inscrição Estadual">
   </div>
-  <button type="button" class="btn btn-success">Salvar</button>
+
+
+  <button type="submit" class="btn btn-success">Salvar</button>
 
 </body>
 </html>
