@@ -43,7 +43,67 @@
   </head>
 
   <body>
+	
+	<script>
+        var xmlhttp = new XMLHttpRequest();
+        var url = "http://url"; 
+        
+          xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                 var myArr = JSON.parse(this.responseText);
+                 myFunction(myArr);
+             }
+          };
+       
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
 
+        function myFunctionOLD(arr) {
+            var out = "";
+            var i;
+                for(i = 0; i < arr.length; i++) {
+                    out += '<a href="' + arr[i].url + '">' +
+                    arr[i].display + '</a><br>';
+                }
+            document.getElementById("iddiv").innerHTML = out;
+        }
+        
+        function myFunction(arr) {
+            console.log(arr);
+            //alert(arr);
+            var out = '<table>';
+            var i;    
+            out+= ' <TH>Nome</TH><TH>Fiador</TH><TH>Contato</TH>';
+            for(i = 0; i < arr.length; i++) {
+                out+= ' <tr>';
+                out += '<td>' + arr[i].nome + '</td>';
+                out += '<td>' + arr[i].fiador + '</td>';
+                out += '<td>' + arr[i].contato + '</td>';
+                console.log(arr[i]);
+                out += '<td> <button id='+arr[i].idCliente+' onclick="excluiCliente(this.id)">Excluir</button> </td>';
+                out+= ' </tr>';
+                
+                      
+            }
+            out += '</table>';
+            document.getElementById("iddiv").innerHTML = out;
+        }
+        
+                
+        function excluiCliente(id){
+            var xmlhttp = new XMLHttpRequest();
+            var url = "http://urlExcluir";
+            xmlhttp.open("POST",url,true);
+            xmlhttp.setRequestHeader('Content-type','application/json');
+            xmlhttp.send('{"idCliente":"'+id+'"}');
+            
+        }
+     
+     
+    
+</script>
+	
+	
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -53,7 +113,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-         <!--<li> <a class="navbar-brand" href="home.php"><img src="images/logo_br_conecta.png" alt="Brconecta" /></a></li>-->
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
@@ -71,28 +131,29 @@
       <div class="row">
         <div class="col-sm-1 col-md-3 sidebar">
       <br><br>
-  <ul class="nav nav-sidebar">
+	  <div id="iddiv"></div>
+	  <br><br>
+      <ul class="nav nav-sidebar">
             <li class="active"><a href="#">ENTRADA/SAÍDA<span class="sr-only">(current)</span></a></li>
-            <li><a href="compra.html">Cadastrar Entrada</a></li>
-            <li><a href="venda.html">Cadastrar Venda</a></li>
+            <li><a href="cad_entrada.php">Cadastrar Entrada</a></li>
+            <li><a href="cad_saida.php">Cadastrar Venda</a></li>
             </ul>
            <ul class="nav nav-sidebar">
             <li class="active"><a href="#">CADASTROS<span class="sr-only">(current)</span></a></li>
              <li><a href="cad_produto.html">Produto</a></li>
             <li><a href="cad_cliente.html">Clientes</a></li>
-            <li><a href="cad_usuario.html">Usuários</a></li>
-            <li><a href="cad_funcinario.html">Funcionários</a></li>
-            <li><a href="cad_fornecedor.html">Fornecedor</a></li>
-            <li><a href="cad_loja.html">Lojas</a></li>
+            <li><a href="cad_usuario.php">Usuários</a></li>
+            <li><a href="cad_funcinario.php">Funcionários</a></li>
+            <li><a href="cad_fornecedor.php">Fornecedor</a></li>
+            <li><a href="cad_loja.php">Lojas</a></li>
             </ul>
 
-      
         </div>
 
           </div>
 
         </div>
-
+<form method="POST" action="http://url" >
 
  <div class="container">
       <div class="header clearfix">
@@ -102,23 +163,23 @@
           <center><h4 class="sub-header">Cliente</h4></center> 
 
 <div class="form-group">
-    <label for="descricao">Nome</label><br>
+    <label for="valor">Nome</label><br>
   <input name="nome" type="nome" class="form-control" class="input" placeholder="Nome">
   </div>  
 
 
 <div class="form-group">
     <label for="valor">Fiador</label><br>
-    <input type="text" class="form-control" name="valor" placeholder="Fiador">
+    <input type="text" class="form-control" name="fiador" placeholder="Fiador">
   </div>
 
   <div class="form-group">
     <label for="valor">Contato Fiador</label><br>
-    <input type="text" class="form-control" name="valor" placeholder="Contato Fiador">
+    <input type="text" class="form-control" name="contato" placeholder="Contato Fiador">
   </div>
   
 
-  <button type="button" class="btn btn-success">Salvar</button>
-  <button type="button" class="btn btn-update">Alterar</button>
+  <input type="submit" class="btn btn-success"></button>
+  <form>
 </body>
 </html>

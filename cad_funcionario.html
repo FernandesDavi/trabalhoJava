@@ -43,7 +43,71 @@
   </head>
 
   <body>
+	
+	<script>
+        var xmlhttp = new XMLHttpRequest();
+        var url = "http://url"; 
+        
+          xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                 var myArr = JSON.parse(this.responseText);
+                 myFunction(myArr);
+             }
+          };
+       
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
 
+        function myFunctionOLD(arr) {
+            var out = "";
+            var i;
+                for(i = 0; i < arr.length; i++) {
+                    out += '<a href="' + arr[i].url + '">' +
+                    arr[i].display + '</a><br>';
+                }
+            document.getElementById("iddiv").innerHTML = out;
+        }
+        
+        function myFunction(arr) {
+            console.log(arr);
+            //alert(arr);
+            var out = '<table>';
+            var i;    
+            out+= ' <TH>Numero</TH><TH>Salario</TH><TH>Funcao</TH>';
+            for(i = 0; i < arr.length; i++) {
+                out+= ' <tr>';
+
+                out += '<td>' + arr[i].nro + '</td>';
+
+				out += '<td>' + arr[i].salario + '</td>';
+				out += '<td>' + arr[i].funcao + '</td>';
+                console.log(arr[i]);
+                out += '<td> <button id='+arr[i].idFuncionario+' onclick="excluiFuncionario(this.id)">Excluir</button> </td>';
+                out+= ' </tr>';
+                
+                      
+            }
+            out += '</table>';
+            document.getElementById("iddiv").innerHTML = out;
+        }
+        
+                
+        function excluiCliente(id){
+            var xmlhttp = new XMLHttpRequest();
+            var url = "http://urlExcluir";
+            xmlhttp.open("POST",url,true);
+            xmlhttp.setRequestHeader('Content-type','application/json');
+            xmlhttp.send('{"idFuncionario":"'+id+'"}');
+            
+        }
+     
+     
+    
+</script>
+ 
+  
+ 
+ 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -53,7 +117,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-         <!--<li> <a class="navbar-brand" href="home.php"><img src="images/logo_br_conecta.png" alt="Brconecta" /></a></li>-->
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
@@ -67,32 +131,38 @@
       </div>
     </nav>
 <br><br>
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-1 col-md-3 sidebar">
       <br><br>
-  <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">ENTRADA/SAÍDA<span class="sr-only">(current)</span></a></li>
-            <li><a href="compra.html">Cadastrar Entrada</a></li>
-            <li><a href="venda.html">Cadastrar Venda</a></li>
+       <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">PRODUTO<span class="sr-only">(current)</span></a></li>
+            <li><a href="cad_produto.html">Cadastrar Produto</a></li>
+            <li><a href="lista_produto.php">Cadastrar Entrada</a></li>
+            <li> <a href="cad_categoria.php">Estoque de Produtos</a></li>
             </ul>
            <ul class="nav nav-sidebar">
             <li class="active"><a href="#">CADASTROS<span class="sr-only">(current)</span></a></li>
-             <li><a href="cad_produto.html">Produto</a></li>
             <li><a href="cad_cliente.html">Clientes</a></li>
-            <li><a href="cad_usuario.html">Usuários</a></li>
-            <li><a href="cad_funcinario.html">Funcionários</a></li>
-            <li><a href="cad_fornecedor.html">Fornecedor</a></li>
-            <li><a href="cad_loja.html">Lojas</a></li>
+            <li><a href="cad_contaspagar.php">Usuários</a></li>
+            <li><a href="cad_contasreceber.php">Funcionários</a></li>
+            <li><a href="cad_contaspagar.php">Fornecedor</a></li>
+            <li><a href="cad_contasreceber.php">Lojas</a></li>
             </ul>
 
-      
+           <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">VENDAS<span class="sr-only">(current)</span></a></li>
+            <li><a href="cad_contasreceber.php">Cadastrar Venda</a></li>
+            <li><a href="cad_contaspagar.php">Consultar Vendas</a></li>
         </div>
+
           </div>
 
         </div>
 
 
+<form method="POST" action="http://url" >
  <div class="container">
       <div class="header clearfix">
         <div class="col-sm-10 col-sm-offset-5 col-md-12 col-md-offset-2 main">
@@ -101,32 +171,24 @@
           <center><h4 class="sub-header">Funcionário</h4></center> 
 
 <div class="form-group">
-    <label for="descricao">Nome</label><br>
-  <input name="nome" type="nome" class="form-control"  class="input" placeholder="Nome">
+    <label for="descricao">Numero da Carteira de Trabalho</label><br>
+  <input name="nro" type="text" class="form-control"  class="input" placeholder="Numero">
   </div>  
 
   
   <div class="form-group">
-    <label for="marca">CPF/CNPJ</label><br>
-    <input type="cpf" class="form-control" name="cpf" placeholder="CPF/CNPJ">
+    <label for="marca">Salario</label><br>
+    <input type="text" class="form-control" name="salario" placeholder="Salario">
   </div>
   
   <div class="form-group">
-    <label for="valor">Email</label><br>
-    <input type="text" class="form-control" name="valor" placeholder="Email">
+    <label for="valor">Funcao</label><br>
+    <input type="text" class="form-control" name="funcao" placeholder="Funcao">
   </div>
-<div class="form-group">
-    <label for="valor">Fiador</label><br>
-    <input type="text" class="form-control" name="valor" placeholder="Fiador">
-  </div>
+ 
 
-  <div class="form-group">
-    <label for="valor">Contato Fiador</label><br>
-    <input type="text" class="form-control" name="valor" placeholder="Contato Fiador">
-  </div>
-  
-
-  <button type="button" class="btn btn-success">Salvar</button>
-
+  <input type="submit" class="btn btn-success">Salvar</button>
+  <br><br>
+<form>
 </body>
 </html>

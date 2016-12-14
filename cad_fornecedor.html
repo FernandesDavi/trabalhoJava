@@ -44,6 +44,67 @@
 
   <body>
 
+	<script>
+        var xmlhttp = new XMLHttpRequest();
+        var url = "http://url"; 
+        
+          xmlhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                 var myArr = JSON.parse(this.responseText);
+                 myFunction(myArr);
+             }
+          };
+       
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+
+        function myFunctionOLD(arr) {
+            var out = "";
+            var i;
+                for(i = 0; i < arr.length; i++) {
+                    out += '<a href="' + arr[i].url + '">' +
+                    arr[i].display + '</a><br>';
+                }
+            document.getElementById("iddiv").innerHTML = out;
+        }
+        
+        function myFunction(arr) {
+            console.log(arr);
+            //alert(arr);
+            var out = '<table>';
+            var i;    
+            out+= ' <TH>CPF</TH><TH>Inscricao</TH>';
+            for(i = 0; i < arr.length; i++) {
+                out+= ' <tr>';
+
+                out += '<td>' + arr[i].cpf + '</td>';
+
+				out += '<td>' + arr[i].inscricao + '</td>';
+                console.log(arr[i]);
+                out += '<td> <button id='+arr[i].idFornecedor+' onclick="excluiFornecedor(this.id)">Excluir</button> </td>';
+                out+= ' </tr>';
+                
+                      
+            }
+            out += '</table>';
+            document.getElementById("iddiv").innerHTML = out;
+        }
+        
+                
+        function excluiCliente(id){
+            var xmlhttp = new XMLHttpRequest();
+            var url = "http://urlExcluir";
+            xmlhttp.open("POST",url,true);
+            xmlhttp.setRequestHeader('Content-type','application/json');
+            xmlhttp.send('{"idForncedor":"'+id+'"}');
+            
+        }
+     
+     
+    
+</script>
+  
+  
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -53,7 +114,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-         <!--<li> <a class="navbar-brand" href="home.php"><img src="images/logo_br_conecta.png" alt="Brconecta" /></a></li>-->
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 		<ul class="nav navbar-nav navbar-left">
@@ -67,14 +128,19 @@
       </div>
     </nav>
 <br><br>
+
+<br><br>
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-1 col-md-3 sidebar">
-		  <br><br>
-<ul class="nav nav-sidebar">
+	  <br><br>
+	  <div id="iddiv"></div>
+	  <br><br>
+
+  <ul class="nav nav-sidebar">
             <li class="active"><a href="#">ENTRADA/SAÍDA<span class="sr-only">(current)</span></a></li>
-            <li><a href="compra.html">Cadastrar Entrada</a></li>
-            <li><a href="venda.html">Cadastrar Venda</a></li>
+            <li><a href="cad_entrada.php">Cadastrar Entrada</a></li>
+            <li><a href="cad_saida.php">Cadastrar Venda</a></li>
             </ul>
            <ul class="nav nav-sidebar">
             <li class="active"><a href="#">CADASTROS<span class="sr-only">(current)</span></a></li>
@@ -83,7 +149,7 @@
             <li><a href="cad_usuario.html">Usuários</a></li>
             <li><a href="cad_funcinario.html">Funcionários</a></li>
             <li><a href="cad_fornecedor.html">Fornecedor</a></li>
-            <li><a href="cad_loja.html">Lojas</a></li>
+            <li><a href="cad_loja.php">Lojas</a></li>
             </ul>
 
       
@@ -93,7 +159,7 @@
 
         </div>
 
-
+<form method="POST" action="http://url" >
  <div class="container">
       <div class="header clearfix">
         <div class="col-sm-10 col-sm-offset-5 col-md-12 col-md-offset-2 main">
@@ -101,27 +167,11 @@
 
           <center><h4 class="sub-header">Fornecedor</h4></center> 
 
-<div class="form-group">
-    <label for="nome">Nome</label><br>
-  <input name="nome" type="nome" class="form-control"  class="input" placeholder="Nome">
-  </div>  
-
-  
   <div class="form-group">
-    <label for="cpfcnpj">CPF/CNPJ</label><br>
-    <input type="text" class="form-control" name="cpfcnpj" placeholder="CPF/CNPJ">
+    <label for="cpf">CPF/CNPJ</label><br>
+    <input type="text" class="form-control" name="cpf" placeholder="CPF/CNPJ">
   </div>
   
-  <div class="form-group">
-    <label for="email">Email</label><br>
-    <input type="email" class="form-control" name="email" placeholder="example@email.com">
-  </div>
-
-  
-  <div class="form-group">
-    <label for="telefone">Telefone</label>
-    <input type="number" class="form-control" id="telefone" name="telefone" placeholder="(00)0000-0000">
-  </div>
   
   <div class="form-group">
     <label for="login">Inscrição Estadual</label>
@@ -129,19 +179,8 @@
   </div>
 
 
-  <button type="submit" class="btn btn-success">Salvar</button>
+  <input type="submit" class="btn btn-success"></button>
   <br><br>
-
-  <table class='table table-hover'>
-    <tr>
-    <th>Nome</th>
-    <th>CPF/CNPJ</th>
-    <th>Email</th>
-    <th>Telefone</th>
-    <th>Inscrição Estadual</th>
-     <th>#</th>
-  </tr>
-  </table>
-
+<form>
 </body>
 </html>
