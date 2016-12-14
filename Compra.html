@@ -42,6 +42,55 @@
     <![endif]-->
   </head>
 
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "http://localhost:8080/PrjCadCliente/webresources/Cliente/buscaC";
+xmlhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+var myArr = JSON.parse(this.responseText);
+myFunction(myArr);
+}
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+function myFunctionOLD(arr) {
+var out = "";
+var i;
+for(i = 0; i < arr.length; i++) {
+out += '<a href="' + arr[i].url + '">' +
+arr[i].display + '</a><br>';
+}
+document.getElementById("id01").innerHTML = out;
+}
+function myFunction(arr) {
+console.log(arr);
+//alert(arr);
+var out = '<table>';
+var i;
+out+= ' <TH>Login</TH><TH>Senha</TH><TH>ID Pessoa</TH><TH>Excluir</TH>';
+for(i = 0; i < arr.length; i++) {
+out+= ' <tr>';
+out += '<td>' + arr[i].valorTotal + '</td>';
+out += '<td>' + arr[i].dataCompra + '</td>';
+out += '<td>' + arr[i].idFuncionario + '</td>';
+out += '<td>' + arr[i].idFornecedor + '</td>';
+out += '<td> <button id='+arr[i].id+' onclick="excluiCliente(this.id)">Excluir</button> </td>';
+//out += '<td>' + arr[i].venda_GMC + '</td>';
+out+= ' </tr>';
+}
+out += '</table>';
+document.getElementById("id01").innerHTML = out;
+}
+function excluiCliente(id){
+var xmlhttp = new XMLHttpRequest();
+var url = "http://localhost:8080/PrjCadCliente/webresources/Cliente/excluiPostC";
+xmlhttp.open("POST",url,true);
+xmlhttp.setRequestHeader('Content-type','application/json');
+xmlhttp.send('{"id":"'+id+'"}');
+}
+</script>
+
   <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -71,25 +120,22 @@
       <div class="row">
         <div class="col-sm-1 col-md-3 sidebar">
 		  <br><br>
-		   <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">PRODUTO<span class="sr-only">(current)</span></a></li>
-            <li><a href="cad_produto.html">Cadastrar Produto</a></li>
-            <li><a href="lista_produto.php">Cadastrar Entrada</a></li>
-            <li> <a href="cad_categoria.php">Estoque de Produtos</a></li>
+		    <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">ENTRADA/SAÍDA<span class="sr-only">(current)</span></a></li>
+            <li><a href="compra.html">Cadastrar Entrada</a></li>
+            <li><a href="venda.html">Cadastrar Venda</a></li>
             </ul>
            <ul class="nav nav-sidebar">
             <li class="active"><a href="#">CADASTROS<span class="sr-only">(current)</span></a></li>
+             <li><a href="cad_produto.html">Produto</a></li>
             <li><a href="cad_cliente.html">Clientes</a></li>
-            <li><a href="cad_contaspagar.php">Usuários</a></li>
-            <li><a href="cad_contasreceber.php">Funcionários</a></li>
-            <li><a href="cad_contaspagar.php">Fornecedor</a></li>
-            <li><a href="cad_contasreceber.php">Lojas</a></li>
+            <li><a href="cad_usuario.html">Usuários</a></li>
+            <li><a href="cad_funcinario.html">Funcionários</a></li>
+            <li><a href="cad_fornecedor.html">Fornecedor</a></li>
+            <li><a href="cad_loja.html">Lojas</a></li>
             </ul>
 
-           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">VENDAS<span class="sr-only">(current)</span></a></li>
-            <li><a href="cad_contasreceber.php">Cadastrar Venda</a></li>
-            <li><a href="cad_contaspagar.php">Consultar Vendas</a></li>
+      
         </div>
 
           </div>
@@ -102,6 +148,10 @@
 
           <center><h4 class="sub-header">Compra</h4></center> 
 
+<div id="id01"></div>
+<form method="POST" action="http://localhost:8080/PrjCadCliente/webresources/Cliente/salvarC">
+
+
 <div class="form-group">
     <label for="idProd">Id - Produto</label>
   <input name="produto" type="text" class="form-control"  style=" width:130px" class="input" placeholder="Id do Produto">
@@ -113,25 +163,8 @@
       <label for="Quantidade">Quantidade</label>
     <input type="qtd" value="1" class="form-control" name="qtd" style=" width:35px">
   </div>
-  <table class="table">
-  <th>
-      Codigo
-    </th>     
-      <th>
-      Produto
-    </th> 
-      <th>
-      Valor
-    </th> 
-      <th>
-        Qtd   
-    </th> 
-      <th>
-      Valor Total
-    </th> 
-</table>
-   
-  <button type="button" class="btn btn-success">Salvar</button>
+
+  <button type="submit" class="btn btn-success">Salvar</button>
 
 </body>
 </html>
